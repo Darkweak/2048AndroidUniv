@@ -177,7 +177,7 @@ public class Game2048 {
                     if(croiss)
                         pile.set(counting, this.getTile(j, i, croiss, vert).getRank());
                     else
-                        pile.set(3-scounting, this.getTile(j, i, croiss, vert).getRank());
+                        pile.set(3-counting, this.getTile(j, i, croiss, vert).getRank());
                     counting++;
                 }
             }
