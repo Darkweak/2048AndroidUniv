@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colBG">#F0F0D8</color>
+    <color name="colScores">#80FF8000</color>
+    <color name="colControl">#8080FF00</color>
+    <color name="colBoard">#BBADA0</color>
+    <color name="white">#FFFFFF</color>
+    <color name="col00">#CDC1B4</color>
+    <color name="col01">#EEE4DA</color>
+    <color name="col02">#EDE0C8</color>
+    <color name="col03">#F2E179</color>
+    <color name="col04">#F59563</color>
+    <color name="col05">#F67C5F</color>
+    <color name="col06">#F65E3B</color>
+    <color name="col07">#EDCF72</color>
+    <color name="col08">#EDCF64</color>
+    <color name="col09">#EDC853</color>
+    <color name="col10">#EBC340</color>
+    <color name="col11">#EDC22E</color>
+    <color name="col12">#FA736B</color>
+    <color name="col13">#FB5C57</color>
+    <color name="col14">#F05137</color>
+    <color name="col15">#6BADD7</color>
+    <color name="col16">#599BE2</color>
+    <color name="col17">#0072C3</color>
+    <color name="col18">#ff0000</color>
+    <color name="col19">#000000</color>
+    <color name="col20">#ffffff</color>
+</resources>
