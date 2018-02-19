@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView score;
     private TextView lastP;
     private RatingBar bestT;
+    private boolean hasWon;
+    private int bestTileScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +126,13 @@ public class MainActivity extends AppCompatActivity {
             for (int j = 0; j < 4; j++){
                 this.box[i][j].setText(this.game.getTile(i,j).toString());
                 int racine = this.game.getTile(i,j).r;
+                if(!hasWon && racine == 11){
+                    this.hasWon = true;
+                    Toast.makeText(MainActivity.this, R.string.win, Toast.LENGTH_LONG).show();
+                }
+
+                if(racine > this.bestTileScore)
+                    this.bestTileScore = racine;
 
                 String name = "col" + racine;
 
@@ -146,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        this.bestT.setRating(this.game.getBestR());
+        this.bestT.setRating(this.bestTileScore);
         this.score.setText("" + this.game.getScore());
         this.lastP.setText(this.game.getLastP());
     }

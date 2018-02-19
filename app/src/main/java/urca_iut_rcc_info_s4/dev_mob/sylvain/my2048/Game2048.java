@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -107,7 +108,6 @@ public class Game2048 {
 
         this.addTile();
         this.addTile();
-        this.addTile();
     }
 
     public void initTest()
@@ -174,38 +174,44 @@ public class Game2048 {
             int counting = 0;
             for (int j = 0; j < 4; j++){
                 if(this.getTile(j, i, croiss, vert).getRank() != 0){
-                    if(croiss)
+
+                    if(j < 3 && this.getTile(j, i, croiss, vert).getRank() == this.getTile(j+1, i, croiss, vert).getRank()){
+                        pile.set(counting, this.getTile(j, i, croiss, vert).getRank()+1);
+                        this.getTile(j+1, i, croiss, vert).set(0, 0);
+                    }
+                    else{
                         pile.set(counting, this.getTile(j, i, croiss, vert).getRank());
-                    else
-                        pile.set(3-counting, this.getTile(j, i, croiss, vert).getRank());
+                    }
                     counting++;
                 }
             }
 
             for (int index = 0; index < 4; index++){
-                if(!croiss)
-                    this.getTile(index, i, croiss, vert).set(pile.get(index), 0);
-                else
-                    this.getTile(index, i, croiss, vert).set(pile.get(3-index), 0);
+                this.getTile(index, i, croiss, vert).set(pile.get(index), 0);
             }
         }
+
+        this.addTile();
     }
 
     public Tile getTile(int lc, int i, boolean croiss, boolean vert)
     {
         if(!vert){
-            if (!croiss){
-                return this.board[3-i][lc];
+
+            if(croiss){
+                return this.board[i][3-lc];
             }
             else{
                 return this.board[i][lc];
             }
+
         }
-        else {
-            if (!croiss){
-                return this.board[lc][3-i];
+        else{
+
+            if(croiss){
+                return this.board[3-lc][i];
             }
-            else{
+            else {
                 return this.board[lc][i];
             }
         }
