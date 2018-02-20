@@ -192,6 +192,14 @@ public class Game2048 {
                         pile.set(counting, this.getTile(j, i, croiss, vert).getRank()+1);
                         this.getTile(j+1, i, croiss, vert).set(0, 0);
                     }
+                    else if(j < 2 && this.getTile(j, i, croiss, vert).getRank() == this.getTile(j+2, i, croiss, vert).getRank() && this.getTile(j+1, i, croiss, vert).getRank() == 0){
+                        pile.set(counting, this.getTile(j, i, croiss, vert).getRank()+1);
+                        this.getTile(j+2, i, croiss, vert).set(0, 0);
+                    }
+                    else if(j < 1 && this.getTile(j, i, croiss, vert).getRank() == this.getTile(j+3, i, croiss, vert).getRank() && this.getTile(j+2, i, croiss, vert).getRank() == 0){
+                        pile.set(counting, this.getTile(j, i, croiss, vert).getRank()+1);
+                        this.getTile(j+3, i, croiss, vert).set(0, 0);
+                    }
                     else{
                         pile.set(counting, this.getTile(j, i, croiss, vert).getRank());
                     }
