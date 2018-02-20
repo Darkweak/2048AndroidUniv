@@ -146,7 +146,8 @@ public class Game2048 {
         }
 
         this.rand = new Random();
-        freeCounting = this.rand.nextInt(freeCounting);
+        if(freeCounting != 0)
+            freeCounting = this.rand.nextInt(freeCounting);
         int rank = this.rand.nextInt(100);
 
         int placingTile = 0;
@@ -227,6 +228,17 @@ public class Game2048 {
                 return this.board[lc][i];
             }
         }
+    }
+
+    public boolean hasMovementAvailable()
+    {
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 4; j++){
+                if((i < 3 && this.getTile(i, j).getRank() == this.getTile(i+1, j).getRank()) || (j < 3 && this.getTile(i, j).getRank() == this.getTile(i, j+1).getRank()))
+                    return true;
+            }
+        }
+        return false;
     }
 
 }

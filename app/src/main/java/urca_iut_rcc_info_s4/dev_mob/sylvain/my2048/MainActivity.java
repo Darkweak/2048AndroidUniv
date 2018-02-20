@@ -122,6 +122,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void update()
     {
+        if(this.game.getHastLost()){
+            if(!this.game.hasMovementAvailable()){
+                Toast.makeText(MainActivity.this, R.string.lost, Toast.LENGTH_LONG).show();
+                findViewById(R.id.buttonT).setEnabled(false);
+                findViewById(R.id.buttonB).setEnabled(false);
+                findViewById(R.id.buttonL).setEnabled(false);
+                findViewById(R.id.buttonR).setEnabled(false);
+            }
+        }
+
         for (int i = 0; i < 4; i++){
             for (int j = 0; j < 4; j++){
                 this.box[i][j].setText(this.game.getTile(i,j).toString());
@@ -129,10 +139,6 @@ public class MainActivity extends AppCompatActivity {
                 if(!hasWon && racine == 11){
                     this.hasWon = true;
                     Toast.makeText(MainActivity.this, R.string.win, Toast.LENGTH_LONG).show();
-                }
-
-                if(this.game.getHastLost()){
-                    Toast.makeText(MainActivity.this, R.string.lost, Toast.LENGTH_LONG).show();
                 }
 
                 if(racine > this.bestTileScore)
