@@ -99,6 +99,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
+        if(this.game.getHastLost()){
+            if(!this.game.hasMovementAvailable()){
+                return true;
+            }
+        }
         switch(event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
