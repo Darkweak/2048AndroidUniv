@@ -3,4 +3,6 @@
     <string name="app_name">Mon 2048</string>
     <string name="restart">Recommencer</string>
     <string name="win">Bravo ! Vous avez gagné !</string>
+    <string name="lost">Vous avez perdu !</string>
+    <string name="new_game">Nouvelle partie</string>
 </resources>

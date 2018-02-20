@@ -138,6 +138,11 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.action_new) {
             this.game = new Game2048();
+            Toast.makeText(MainActivity.this, R.string.new_game, Toast.LENGTH_LONG).show();
+            findViewById(R.id.buttonT).setEnabled(true);
+            findViewById(R.id.buttonB).setEnabled(true);
+            findViewById(R.id.buttonL).setEnabled(true);
+            findViewById(R.id.buttonR).setEnabled(true);
             this.game.init();
             this.update();
         }
