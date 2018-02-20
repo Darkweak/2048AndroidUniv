@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -24,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
     private RatingBar bestT;
     private boolean hasWon;
     private int bestTileScore;
+
+    private float x1,x2,y1,y2;
+    static final int MIN_DISTANCE = 150;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +94,38 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        switch(event.getAction())
+        {
+            case MotionEvent.ACTION_DOWN:
+                x1 = event.getX();
+                y1 = event.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+                x2 = event.getX();
+                y2 = event.getY();
+                float deltaX = x2 - x1;
+                float deltaY = y2 - y1;
+                if (Math.abs(deltaX) > MIN_DISTANCE)
+                {
+                    if(deltaX > 0)
+                        tryMove(2);
+                    else
+                        tryMove(0);
+                }
+                else if(Math.abs(deltaY) > MIN_DISTANCE){
+                    if(deltaY > 0)
+                        tryMove(3);
+                    else
+                        tryMove(1);
+                }
+                break;
+        }
+        return super.onTouchEvent(event);
     }
 
     @Override
