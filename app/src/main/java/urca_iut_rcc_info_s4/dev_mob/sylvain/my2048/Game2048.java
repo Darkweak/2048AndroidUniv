@@ -20,9 +20,14 @@ public class Game2048 {
     private String lastP = "";
     private Random rand;
     private int nbv;
+    private boolean hasLost;
 
     public int getScore() {
         return score;
+    }
+
+    public boolean getHastLost() {
+        return hasLost;
     }
 
     public int getBestR() {
@@ -127,9 +132,10 @@ public class Game2048 {
         this.board[3][3].r = 2;
     }
 
-    public void addTile()
+    public boolean addTile()
     {
 
+        boolean res = false;
         int freeCounting = 0;
         for (int i = 0; i < 4; i++){
             for (int j = 0; j < 4; j++){
@@ -148,15 +154,21 @@ public class Game2048 {
             for (int j = 0; j < 4; j++){
                 if(this.board[i][j].getRank() == 0){
                     if(placingTile == freeCounting){
-                        if (rank > 90)
+                        if (rank > 90){
                             this.board[i][j].set(2, -1);
-                        else
+                            res = true;
+                        }
+                        else{
                             this.board[i][j].set(1, -1);
+                            res = true;
+                        }
                     }
                     placingTile++;
                 }
             }
         }
+
+        return res;
 
     }
 
@@ -191,7 +203,7 @@ public class Game2048 {
             }
         }
 
-        this.addTile();
+        this.hasLost = !(this.addTile());
     }
 
     public Tile getTile(int lc, int i, boolean croiss, boolean vert)

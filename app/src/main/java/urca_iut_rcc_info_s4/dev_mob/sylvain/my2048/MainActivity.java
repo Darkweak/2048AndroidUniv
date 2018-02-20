@@ -131,6 +131,10 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, R.string.win, Toast.LENGTH_LONG).show();
                 }
 
+                if(this.game.getHastLost()){
+                    Toast.makeText(MainActivity.this, R.string.lost, Toast.LENGTH_LONG).show();
+                }
+
                 if(racine > this.bestTileScore)
                     this.bestTileScore = racine;
 
