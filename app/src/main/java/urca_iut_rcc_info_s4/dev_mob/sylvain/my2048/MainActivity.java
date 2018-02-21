@@ -1,12 +1,16 @@
 package urca_iut_rcc_info_s4.dev_mob.sylvain.my2048;
 
+import android.content.res.Configuration;
 import android.graphics.Color;
+import android.hardware.SensorManager;
 import android.support.annotation.ColorRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -38,6 +42,32 @@ public class MainActivity extends AppCompatActivity {
             for (int j = 0; j < 4; j++){
                 boxId[i][j] = Integer.parseInt(i + "" + j);
             }
+        }
+
+        OrientationEventListener mOrientationListener = new OrientationEventListener(this,
+                SensorManager.SENSOR_DELAY_NORMAL) {
+
+            @Override
+            public void onOrientationChanged(int orientation) {
+                if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+                    View slo = findViewById(R.id.scoresLO);
+                    View glo = findViewById(R.id.globalLO);
+                    View clo = findViewById(R.id.controlLO);
+                    View blo = findViewById(R.id.boardLO);
+
+                    blo.setLayoutParams(new LinearLayout.LayoutParams(glo.getMeasuredWidth()/2, glo.getMeasuredHeight()));
+
+                    slo.setLayoutParams(new LinearLayout.LayoutParams(glo.getMeasuredWidth()/2, (int)(glo.getMeasuredHeight()*0.2)));
+                    clo.setLayoutParams(new LinearLayout.LayoutParams(glo.getMeasuredWidth()/2, (int)(glo.getMeasuredHeight()*0.8)));
+                    
+                }
+            }
+        };
+
+        if (mOrientationListener.canDetectOrientation() == true) {
+            mOrientationListener.enable();
+        } else {
+            mOrientationListener.disable();
         }
         for (int i = 0; i < 4; i++){
             for (int j = 0; j < 4; j++){
@@ -164,6 +194,12 @@ public class MainActivity extends AppCompatActivity {
         clo.setLayoutParams(new LinearLayout.LayoutParams(clo.getMeasuredWidth(), (int)(generalValueRest*0.8)));
 
 
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Toast.makeText(MainActivity.this, "Changed", Toast.LENGTH_SHORT).show();
     }
 
     public void update()

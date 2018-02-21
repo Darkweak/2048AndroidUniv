@@ -9,6 +9,7 @@
     android:paddingRight="20dp"
     android:paddingLeft="20dp"
     android:background="@color/colBG"
+    android:configChanges="orientation"
     android:id="@+id/globalLO">
 
 

@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="urca_iut_rcc_info_s4.dev_mob.sylvain.my2048.MainActivity"
+    android:paddingRight="20dp"
+    android:paddingLeft="20dp"
+    android:background="@color/colBG"
+    android:configChanges="orientation"
+    android:id="@+id/globalLO">
+
+
+    <!-- Un linear permettant de contenir les relative layouts -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="20dp">
+
+
+        <!-- Démarrage code XML différents layouts internes -->
+
+        <android.widget.TableLayout
+            android:id="@+id/boardLO"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:background="@color/colBoard"
+            android:orientation="horizontal">
+
+
+            <android.widget.TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@color/colBoard">
+
+                <android.widget.TextView
+                    android:id="@+id/box00"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="25"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="131072"
+                    android:textStyle="bold" />
+
+                <android.widget.TextView
+                    android:id="@+id/box01"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="25"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="131072"
+                    android:textStyle="bold" />
+
+                <android.widget.TextView
+                    android:id="@+id/box02"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="25"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="131072"
+                    android:textStyle="bold" />
+
+                <android.widget.TextView
+                    android:id="@+id/box03"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="25"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="131072"
+                    android:textStyle="bold" />
+
+            </android.widget.TableRow>
+
+            <android.widget.TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@color/colBoard">
+
+                <android.widget.TextView
+                    android:id="@+id/box10"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="25"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="131072"
+                    android:textStyle="bold" />
+
+                <android.widget.TextView
+                    android:id="@+id/box11"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="25"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="131072"
+                    android:textStyle="bold" />
+
+                <android.widget.TextView
+                    android:id="@+id/box12"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="25"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="131072"
+                    android:textStyle="bold" />
+
+                <android.widget.TextView
+                    android:id="@+id/box13"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="25"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="131072"
+                    android:textStyle="bold" />
+
+            </android.widget.TableRow>
+
+            <android.widget.TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@color/colBoard">
+
+                <android.widget.TextView
+                    android:id="@+id/box20"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="25"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="131072"
+                    android:textStyle="bold" />
+
+                <android.widget.TextView
+                    android:id="@+id/box21"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="25"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="131072"
+                    android:textStyle="bold" />
+
+                <android.widget.TextView
+                    android:id="@+id/box22"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="25"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="131072"
+                    android:textStyle="bold" />
+
+                <android.widget.TextView
+                    android:id="@+id/box23"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="25"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="131072"
+                    android:textStyle="bold" />
+
+            </android.widget.TableRow>
+
+            <android.widget.TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@color/colBoard">
+
+                <android.widget.TextView
+                    android:id="@+id/box30"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="25"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="131072"
+                    android:textStyle="bold" />
+
+                <android.widget.TextView
+                    android:id="@+id/box31"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="25"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="131072"
+                    android:textStyle="bold" />
+
+                <android.widget.TextView
+                    android:id="@+id/box32"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="25"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="131072"
+                    android:textStyle="bold" />
+
+                <android.widget.TextView
+                    android:id="@+id/box33"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="25"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="131072"
+                    android:textStyle="bold" />
+
+            </android.widget.TableRow>
+
+
+        </android.widget.TableLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="20dp">
+            <android.widget.RelativeLayout
+                android:id="@+id/scoresLO"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <android.widget.TextView
+                    android:id="@+id/scoreTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="1dp"
+                    android:background="@color/white"
+                    android:gravity="right|bottom"
+                    android:text="score"
+                    android:textStyle="bold" />
+
+                <android.widget.TextView
+                    android:id="@+id/lastPTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/scoreTV"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_margin="1dp"
+                    android:background="@color/white"
+                    android:text="addition"
+                    android:textStyle="bold" />
+
+                <android.support.v7.widget.AppCompatRatingBar
+                    android:id="@+id/bestTRB"
+                    style="@style/Base.Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:foregroundGravity="top"
+                    android:isIndicator="true"
+                    android:max="17"
+                    android:numStars="17"
+                    android:rating="0" />
+
+            </android.widget.RelativeLayout>
+
+            <android.widget.RelativeLayout
+                android:id="@+id/controlLO"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3">
+
+                <ImageButton
+                    android:id="@+id/buttonB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/buttonT"
+                    android:layout_alignStart="@+id/buttonT"
+                    android:layout_below="@+id/buttonT"
+                    android:layout_marginTop="23dp"
+                    android:backgroundTint="@android:color/transparent"
+                    app:srcCompat="@drawable/fleche_bas4" />
+
+                <ImageButton
+                    android:id="@+id/buttonL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/buttonR"
+                    android:layout_marginLeft="55dp"
+                    android:layout_marginStart="55dp"
+                    android:backgroundTint="@android:color/transparent"
+                    app:srcCompat="@drawable/fleche_gauche4" />
+
+                <ImageButton
+                    android:id="@+id/buttonR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/buttonB"
+                    android:layout_marginBottom="65dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/buttonL"
+                    android:layout_toRightOf="@+id/buttonL"
+                    android:backgroundTint="@android:color/transparent"
+                    app:srcCompat="@drawable/fleche_droite4" />
+
+                <ImageButton
+                    android:id="@+id/buttonT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:backgroundTint="@android:color/transparent"
+                    app:srcCompat="@drawable/fleche_haut4" />
+            </android.widget.RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
