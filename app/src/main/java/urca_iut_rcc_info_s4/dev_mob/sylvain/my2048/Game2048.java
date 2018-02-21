@@ -47,10 +47,10 @@ public class Game2048 {
         public Tile()
         {
             this.flag = -1;
-            this.pow2[0] = 0;
             for (int i = 0; i < Tile.pow2.length; i++){
                 Tile.pow2[i] = ((int)Math.pow(2, i));
             }
+            this.pow2[0] = 0;
         }
 
         private void set(int rk, int fl){
@@ -176,6 +176,7 @@ public class Game2048 {
     public void move(boolean croiss, boolean vert)
     {
         ArrayList<Integer> pile = new ArrayList<Integer>(4);
+        this.score = 0;
 
         for (int i = 0; i < 4; i++){
             pile.clear();
@@ -209,6 +210,10 @@ public class Game2048 {
 
             for (int index = 0; index < 4; index++){
                 this.getTile(index, i, croiss, vert).set(pile.get(index), 0);
+                if (this.getTile(index, i, croiss, vert).value() != 0){
+                    this.score += this.getTile(index, i, croiss, vert).value();
+                    //this.lastP += "" + this.getTile(index, i, croiss, vert).value() + "+"; Must fix overriding text
+                }
             }
         }
 
