@@ -108,6 +108,9 @@ public class Game2048 {
         this.lastP = "";
         this.bestR = 0;
 
+        this.addTile();
+        this.addTile();
+
     }
 
     public void initTest()

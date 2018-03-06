@@ -1,8 +1,11 @@
 package urca_iut_rcc_info_s4.dev_mob.sylvain.my2048;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -22,6 +25,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Arrays;
+import java.util.Collections;
 
 import static java.lang.Integer.parseInt;
 
@@ -37,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
     private float x1,x2,y1,y2;
     static final int MIN_DISTANCE = 150;
+
+    String[] highscores = new String[10];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +129,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //this.game.initTest();
-        this.read_datas(this);
+        this.read_datas(this, "save");
+        this.read_high_scores(this);
         this.update();
     }
 
@@ -182,6 +190,33 @@ public class MainActivity extends AppCompatActivity {
             this.game.init();
             this.update();
         }
+        else if(id == R.id.action_highscores){
+            AlertDialog.Builder builder;
+            this.read_high_scores(this);
+            String highscores_listing = "";
+
+            for (int i = 0; i < this.highscores.length; i++){
+                highscores_listing += this.highscores[i] + "\n";
+            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog);
+            } else {
+                builder = new AlertDialog.Builder(this);
+            }
+            builder.setTitle("Meilleurs scores")
+                    .setMessage(highscores_listing)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_info)
+                    .show();
+        }
+        else if(id == R.id.action_undo){
+            this.read_datas(this, "undo");
+            this.update();
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -217,6 +252,19 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.buttonB).setEnabled(false);
                 findViewById(R.id.buttonL).setEnabled(false);
                 findViewById(R.id.buttonR).setEnabled(false);
+
+                String[] temp_scores = new String[11];
+                String high_scores = "";
+                for (int i = 0; i < 10; i++){
+                    temp_scores[i] = this.highscores[i];
+                }
+                temp_scores[10] = "" + this.game.getScore();
+                Arrays.sort(temp_scores);
+                for (int j = 0; j < 10; j++){
+                    this.highscores[j] = temp_scores[10-j];
+                    high_scores += temp_scores[10-j] + ",";
+                }
+                this.write_to_file(high_scores, this, "highscores");
             }
         }
 
@@ -261,7 +309,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        this.write_to_file(values, this);
+        this.write_to_file(values, this, "save");
         this.bestT.setRating(this.bestTileScore);
         this.score.setText("" + this.game.getScore());
         this.lastP.setText(this.game.getLastP());
@@ -286,9 +334,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void write_to_file(String data,Context context) {
+    private void write_to_file(String data,Context context, String file)
+    {
         try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("save.txt", Context.MODE_PRIVATE));
+            if(file.equals("save"))
+                this.copy_from_now_to_undo(this);
+
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(file + ".txt", Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
             outputStreamWriter.close();
         }
@@ -297,12 +349,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void read_datas(Context context) {
-
-        String ret = "";
+    private void read_datas(Context context, String file)
+    {
 
         try {
-            InputStream inputStream = context.openFileInput("save.txt");
+            InputStream inputStream = context.openFileInput(file + ".txt");
 
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -313,13 +364,75 @@ public class MainActivity extends AppCompatActivity {
                 while ( (receiveString = bufferedReader.readLine()) != null ) {
                     String[] datas = receiveString.split(",");
                     for(int j = 0; j < 4; j++){
-                        Log.i("datas ", datas[j]);
                         this.game.getTile(i,j).r = parseInt(datas[j]);
+                        this.game.getTile(i,j).flag = 0;
                     }
                     i++;
                 }
 
                 inputStream.close();
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+    }
+
+    private void read_high_scores(Context context)
+    {
+
+        try {
+            InputStream inputStream = context.openFileInput("highscores.txt");
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    String[] datas = receiveString.split(",");
+                    for(int j = 0; j < 10; j++){
+                        this.highscores[j] = datas[j];
+                    }
+                }
+
+                inputStream.close();
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+            this.write_to_file("0,0,0,0,0,0,0,0,0,0,", this, "highscores");
+            for (int i = 0; i < 10; i++){
+                this.highscores[i] = "0";
+            }
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+    }
+
+    private void copy_from_now_to_undo(Context context)
+    {
+        try {
+            InputStream inputStream = context.openFileInput("save.txt");
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                int i = 0;
+
+                String lines = "";
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    lines += receiveString + "\r\n";
+                }
+
+                inputStream.close();
+
+                Log.i("Lines", lines);
+                this.write_to_file(lines, this, "undo");
             }
         }
         catch (FileNotFoundException e) {

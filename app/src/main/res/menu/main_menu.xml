@@ -5,7 +5,17 @@
     <item
         android:id="@+id/action_new"
         android:orderInCategory="100"
-        app:showAsAction="ifRoom"
+        app:showAsAction="never"
         android:title="@string/restart" />
+    <item
+        android:id="@+id/action_undo"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/undo" />
+    <item
+        android:id="@+id/action_highscores"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/highscores" />
 
 </menu>

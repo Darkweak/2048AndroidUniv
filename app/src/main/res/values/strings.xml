@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">My 2048</string>
     <string name="restart">Restart</string>
+    <string name="undo">Undo</string>
+    <string name="highscores">Highscores</string>
     <string name="win">Yeah it\'s great ! You won !</string>
     <string name="lost">You lost the game !</string>
     <string name="new_game">You started a new game !</string>

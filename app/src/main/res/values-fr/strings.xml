@@ -5,4 +5,6 @@
     <string name="win">Bravo ! Vous avez gagné !</string>
     <string name="lost">Vous avez perdu !</string>
     <string name="new_game">Nouvelle partie</string>
+    <string name="undo">Annuler</string>
+    <string name="highscores">Meilleurs scores</string>
 </resources>
