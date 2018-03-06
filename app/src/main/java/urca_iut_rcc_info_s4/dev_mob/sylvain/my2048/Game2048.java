@@ -1,10 +1,7 @@
 package urca_iut_rcc_info_s4.dev_mob.sylvain.my2048;
 
-import android.content.res.Resources;
 import android.util.Log;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -111,8 +108,6 @@ public class Game2048 {
         this.lastP = "";
         this.bestR = 0;
 
-        this.addTile();
-        this.addTile();
     }
 
     public void initTest()

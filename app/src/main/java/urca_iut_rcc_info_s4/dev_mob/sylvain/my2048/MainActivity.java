@@ -1,24 +1,29 @@
 package urca_iut_rcc_info_s4.dev_mob.sylvain.my2048;
 
+import android.content.Context;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.hardware.SensorManager;
-import android.support.annotation.ColorRes;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.OrientationEventListener;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+import static java.lang.Integer.parseInt;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         int[][] boxId = new int[4][4];
         for (int i = 0; i < 4; i++){
             for (int j = 0; j < 4; j++){
-                boxId[i][j] = Integer.parseInt(i + "" + j);
+                boxId[i][j] = parseInt(i + "" + j);
             }
         }
 
@@ -116,7 +121,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        this.game.initTest();
+        //this.game.initTest();
+        this.read_datas(this);
         this.update();
     }
 
@@ -214,6 +220,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        String values = "";
+
         for (int i = 0; i < 4; i++){
             for (int j = 0; j < 4; j++){
                 this.box[i][j].setText(this.game.getTile(i,j).toString());
@@ -245,8 +253,15 @@ public class MainActivity extends AppCompatActivity {
                 catch (Exception e){
                     e.printStackTrace();
                 }
+
+                values += this.game.getTile(i,j).getRank() + ",";
             }
+
+            values += "\r\n";
+
         }
+
+        this.write_to_file(values, this);
         this.bestT.setRating(this.bestTileScore);
         this.score.setText("" + this.game.getScore());
         this.lastP.setText(this.game.getLastP());
@@ -268,6 +283,49 @@ public class MainActivity extends AppCompatActivity {
         else if (direction == 3){
             this.game.move(true, true);
             this.update();
+        }
+    }
+
+    private void write_to_file(String data,Context context) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("save.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+
+    private void read_datas(Context context) {
+
+        String ret = "";
+
+        try {
+            InputStream inputStream = context.openFileInput("save.txt");
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                int i = 0;
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    String[] datas = receiveString.split(",");
+                    for(int j = 0; j < 4; j++){
+                        Log.i("datas ", datas[j]);
+                        this.game.getTile(i,j).r = parseInt(datas[j]);
+                    }
+                    i++;
+                }
+
+                inputStream.close();
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
         }
     }
 }
